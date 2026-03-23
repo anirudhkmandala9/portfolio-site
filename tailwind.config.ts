@@ -9,21 +9,27 @@ const config: Config = {
     extend: {
       colors: {
         bg: {
-          primary: "#0a0e17",
-          secondary: "#0f1520",
-          tertiary: "#141c2b",
+          DEFAULT: "#050a0e",
+          card: "#0a1018",
+          hover: "#0d1520",
         },
-        border: "#1e293b",
-        terminal: {
+        line: {
+          DEFAULT: "#1a2332",
+          hover: "#243044",
+        },
+        t: {
           green: "#00ff88",
-          "green-dim": "#00cc6a",
           amber: "#ffb800",
-          "amber-dim": "#cc9300",
           red: "#ff4444",
+        },
+        txt: {
+          DEFAULT: "#e2e8f0",
+          secondary: "#8892a4",
+          muted: "#4a5568",
         },
       },
       fontFamily: {
-        mono: ["JetBrains Mono", "monospace"],
+        mono: ['"JetBrains Mono"', "monospace"],
         sans: ["Inter", "system-ui", "sans-serif"],
       },
     },
