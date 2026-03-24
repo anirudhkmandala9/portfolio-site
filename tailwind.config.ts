@@ -9,28 +9,17 @@ const config: Config = {
     extend: {
       colors: {
         bg: {
-          DEFAULT: "#050a0e",
-          card: "#0a1018",
-          hover: "#0d1520",
+          DEFAULT: "#09090b",
+          subtle: "#18181b",
         },
-        line: {
-          DEFAULT: "#1a2332",
-          hover: "#243044",
-        },
-        t: {
-          green: "#00ff88",
-          amber: "#ffb800",
-          red: "#ff4444",
-        },
-        txt: {
-          DEFAULT: "#e2e8f0",
-          secondary: "#8892a4",
-          muted: "#4a5568",
+        accent: {
+          1: "#818cf8",
+          2: "#c084fc",
         },
       },
       fontFamily: {
+        sans: ["Inter", "system-ui", "-apple-system", "sans-serif"],
         mono: ['"JetBrains Mono"', "monospace"],
-        sans: ["Inter", "system-ui", "sans-serif"],
       },
     },
   },

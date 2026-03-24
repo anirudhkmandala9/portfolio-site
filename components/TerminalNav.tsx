@@ -5,27 +5,23 @@ import { usePathname } from "next/navigation";
 import clsx from "clsx";
 
 const pages = [
-  { href: "/", label: "HOME" },
-  { href: "/projects", label: "PROJECTS" },
-  { href: "/experience", label: "EXPERIENCE" },
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/projects", label: "Projects" },
+  { href: "/experience", label: "Experience" },
 ];
 
-export function TerminalNav() {
+export function Nav() {
   const pathname = usePathname();
 
   return (
-    <nav className="fixed top-0 z-50 w-full border-b border-line bg-bg/80 backdrop-blur-md">
-      <div className="mx-auto flex h-12 max-w-5xl items-center justify-between px-6">
-        <Link href="/" className="flex items-center gap-2 group">
-          <span className="text-t-green font-bold text-sm tracking-tight group-hover:glow transition-all">
-            AKM
-          </span>
-          <span className="hidden sm:inline text-[10px] text-txt-muted tracking-widest">
-            TERMINAL
-          </span>
+    <nav className="fixed top-0 z-50 w-full">
+      <div className="mx-auto flex h-16 max-w-3xl items-center justify-between px-6">
+        <Link href="/" className="text-sm font-semibold text-zinc-100 hover:text-white transition">
+          AKM
         </Link>
 
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1 rounded-full glass px-1.5 py-1.5">
           {pages.map((p) => {
             const active = pathname === p.href;
             return (
@@ -33,10 +29,10 @@ export function TerminalNav() {
                 key={p.href}
                 href={p.href}
                 className={clsx(
-                  "px-3 py-1.5 text-[11px] tracking-wider transition-all rounded-sm",
+                  "px-3.5 py-1.5 text-[13px] rounded-full transition-all duration-200",
                   active
-                    ? "text-t-green bg-t-green/8"
-                    : "text-txt-muted hover:text-txt-secondary"
+                    ? "bg-zinc-800 text-white font-medium"
+                    : "text-zinc-500 hover:text-zinc-300"
                 )}
               >
                 {p.label}
@@ -45,10 +41,13 @@ export function TerminalNav() {
           })}
         </div>
 
-        <div className="flex items-center gap-2">
-          <div className="h-1.5 w-1.5 rounded-full bg-t-green pulse-dot" />
-          <span className="text-[10px] text-txt-muted hidden sm:inline">ONLINE</span>
-        </div>
+        <a
+          href="/resume.pdf"
+          target="_blank"
+          className="text-[13px] text-zinc-500 hover:text-white transition hidden sm:block"
+        >
+          Resume
+        </a>
       </div>
     </nav>
   );

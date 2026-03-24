@@ -1,16 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Link from "next/link";
-
-const fade = {
-  hidden: { opacity: 0, y: 12 },
-  show: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.06, duration: 0.4 },
-  }),
-};
+import { PageWrapper } from "../../components/PageWrapper";
+import { FadeIn } from "../../components/FadeIn";
 
 const experiences = [
   {
@@ -18,8 +10,8 @@ const experiences = [
     company: "Profit Recovery Partners",
     location: "Santa Ana, CA",
     period: "Spring / Summer 2026",
-    status: "INCOMING",
-    statusColor: "text-t-amber",
+    badge: "Incoming",
+    badgeColor: "bg-accent-2/10 text-accent-2 border-accent-2/20",
     bullets: [],
   },
   {
@@ -27,11 +19,11 @@ const experiences = [
     company: "VerdeVista Partners",
     location: "West Grove, PA",
     period: "Oct 2025 — Mar 2026",
-    status: "COMPLETED",
-    statusColor: "text-t-green",
+    badge: null,
+    badgeColor: "",
     bullets: [
-      "Screened 50+ lower-middle-market acquisition targets across industrial and service sectors against investment criteria.",
-      "Built integrated 3-statement and DCF models to evaluate IRR, downside risk, and scenario sensitivity.",
+      "Screened 50+ lower-middle-market acquisition targets across industrial and service sectors against firm investment criteria.",
+      "Built integrated 3-statement and DCF models to evaluate IRR, downside risk, and scenario sensitivity for each target.",
       "Conducted market sizing, competitive analysis, and management diligence; supported IC materials and deal execution.",
     ],
   },
@@ -40,8 +32,8 @@ const experiences = [
     company: "Venture Capital Society at UC Irvine",
     location: "Irvine, CA",
     period: "May 2025 — Present",
-    status: "ACTIVE",
-    statusColor: "text-t-green",
+    badge: null,
+    badgeColor: "",
     bullets: [
       "Performed diligence on VC firms, quant funds, and investment banks; structured partnerships benefiting 100+ members.",
       "Led workshops on valuation and financial modeling (DCF, comps, sensitivity) and delivered investment research sessions.",
@@ -52,8 +44,8 @@ const experiences = [
     company: "UC Irvine Student Housing",
     location: "Irvine, CA",
     period: "Sep 2023 — Jun 2025",
-    status: "COMPLETED",
-    statusColor: "text-t-green",
+    badge: null,
+    badgeColor: "",
     bullets: [
       "Directed 15-person executive board and managed $25,000 budget for a 1,300+ attendee campus event.",
       "Applied regression analysis to operational and community data to support budgeting decisions and resource allocation.",
@@ -61,169 +53,95 @@ const experiences = [
   },
 ];
 
-const education = [
-  {
-    degree: "B.S. Applied Mathematics & Computational Sciences",
-    track: "Data Science Track",
-    school: "University of California, Irvine",
-    year: "Expected 2027",
-  },
-  {
-    degree: "B.A. Quantitative Economics",
-    track: null,
-    school: "University of California, Irvine",
-    year: "Expected 2027",
-  },
-];
-
-const honors = ["Spring 2024", "Fall 2024", "Winter 2025", "Spring 2025", "Fall 2025"];
-
-const certifications = [
-  { name: "CFA Level I Candidate", org: "CFA Institute — May 2026" },
-  { name: "Financial Markets", org: "Yale University" },
-  { name: "Machine Learning", org: "University of London" },
-  { name: "Marketing", org: "Wharton School" },
-];
-
-const awards = [
-  { name: "RHA President of the Year", org: "PACURH — 2023" },
-];
-
 export default function ExperiencePage() {
   return (
-    <div className="space-y-16">
-      {/* Header */}
-      <motion.div variants={fade} initial="hidden" animate="show" custom={0}>
-        <Link href="/" className="text-[10px] tracking-wider text-txt-muted hover:text-t-green transition">
-          ← BACK TO HOME
-        </Link>
-        <h1 className="mt-4 text-2xl font-bold text-txt tracking-tight">Experience</h1>
-        <p className="mt-2 text-[13px] font-sans text-txt-secondary max-w-xl">
-          Professional roles, education, certifications, and awards.
-        </p>
-      </motion.div>
+    <PageWrapper>
+      <div className="space-y-16">
+        {/* Header */}
+        <section>
+          <FadeIn>
+            <Link href="/" className="text-[13px] text-zinc-500 hover:text-white transition">
+              &larr; Home
+            </Link>
+          </FadeIn>
+          <FadeIn delay={0.05}>
+            <h1 className="mt-6 text-3xl font-bold tracking-tight">Experience</h1>
+          </FadeIn>
+          <FadeIn delay={0.1}>
+            <p className="mt-3 text-[16px] text-zinc-400 max-w-xl leading-relaxed">
+              Where I&apos;ve worked and what I&apos;ve done.
+            </p>
+          </FadeIn>
+        </section>
 
-      {/* ── Work Experience ── */}
-      <motion.section variants={fade} initial="hidden" animate="show" custom={1}>
-        <div className="flex items-center gap-3 mb-4">
-          <div className="text-[10px] tracking-widest text-txt-muted">WORK EXPERIENCE</div>
-          <div className="flex-1 border-t border-line" />
-          <span className="text-[10px] text-txt-muted">{experiences.length} RECORDS</span>
-        </div>
+        {/* Timeline */}
+        <section>
+          <div className="relative">
+            {/* Timeline line */}
+            <div className="absolute left-[7px] top-3 bottom-3 w-px bg-zinc-800/80 hidden sm:block" />
 
-        <div className="space-y-3">
-          {experiences.map((exp, i) => (
-            <motion.div
-              key={i}
-              variants={fade}
-              initial="hidden"
-              animate="show"
-              custom={i + 2}
-              className="t-card rounded p-5"
-            >
-              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-1">
-                <div>
-                  <div className="text-[14px] font-bold text-txt">{exp.title}</div>
-                  <div className="text-[12px] text-t-amber/80 mt-0.5">{exp.company}</div>
-                </div>
-                <div className="flex items-center gap-3 shrink-0">
-                  <span className="text-[11px] text-txt-muted">{exp.period}</span>
-                  <span className={`text-[10px] font-bold tracking-wider ${exp.statusColor}`}>
-                    [{exp.status}]
-                  </span>
-                </div>
-              </div>
-              <div className="text-[11px] text-txt-muted mb-3">{exp.location}</div>
-
-              {exp.bullets.length > 0 && (
-                <div className="space-y-2 border-t border-line pt-3">
-                  {exp.bullets.map((b, j) => (
-                    <div key={j} className="flex gap-2 text-[11px] font-sans text-txt-secondary leading-relaxed">
-                      <span className="text-t-green/40 mt-px shrink-0">▸</span>
-                      <span>{b}</span>
+            <div className="space-y-10">
+              {experiences.map((exp, i) => (
+                <FadeIn key={i} delay={i * 0.08}>
+                  <div className="relative sm:pl-10">
+                    {/* Timeline dot */}
+                    <div className="absolute left-0 top-2 hidden sm:block">
+                      <div className="h-[15px] w-[15px] rounded-full border-2 border-zinc-700 bg-bg flex items-center justify-center">
+                        <div className="h-[5px] w-[5px] rounded-full bg-accent-1" />
+                      </div>
                     </div>
-                  ))}
-                </div>
-              )}
-            </motion.div>
-          ))}
-        </div>
-      </motion.section>
 
-      {/* ── Education ── */}
-      <motion.section variants={fade} initial="hidden" whileInView="show" viewport={{ once: true }} custom={0}>
-        <div className="flex items-center gap-3 mb-4">
-          <div className="text-[10px] tracking-widest text-txt-muted">EDUCATION</div>
-          <div className="flex-1 border-t border-line" />
-        </div>
+                    <div className="glass rounded-xl p-5 sm:p-6">
+                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-1">
+                        <div>
+                          <div className="flex items-center gap-2.5 flex-wrap">
+                            <h3 className="text-[16px] font-semibold text-zinc-100">{exp.title}</h3>
+                            {exp.badge && (
+                              <span className={`text-[10px] font-medium rounded-full border px-2 py-0.5 ${exp.badgeColor}`}>
+                                {exp.badge}
+                              </span>
+                            )}
+                          </div>
+                          <div className="text-[14px] text-accent-1/80 mt-0.5">{exp.company}</div>
+                        </div>
+                        <div className="text-[12px] text-zinc-600 shrink-0">{exp.period}</div>
+                      </div>
+                      <div className="text-[12px] text-zinc-600 mb-3">{exp.location}</div>
 
-        <div className="space-y-3">
-          {education.map((d, i) => (
-            <div key={i} className="t-card rounded p-5">
-              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
-                <div>
-                  <div className="text-[14px] font-bold text-txt">{d.degree}</div>
-                  {d.track && <div className="text-[11px] text-t-amber/80 mt-0.5">{d.track}</div>}
-                  <div className="text-[11px] text-txt-muted mt-1">{d.school}</div>
-                </div>
-                <span className="text-[11px] text-txt-muted shrink-0">{d.year}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Dean's List */}
-        <div className="mt-4 t-card rounded p-5">
-          <div className="text-[10px] font-bold tracking-widest text-t-amber mb-3">DEAN&apos;S HONORS LIST</div>
-          <div className="flex flex-wrap gap-2">
-            {honors.map((h) => (
-              <span key={h} className="rounded border border-t-amber/15 bg-t-amber/5 px-3 py-1 text-[11px] text-t-amber/80">
-                {h}
-              </span>
-            ))}
-          </div>
-        </div>
-      </motion.section>
-
-      {/* ── Certifications & Awards ── */}
-      <motion.section variants={fade} initial="hidden" whileInView="show" viewport={{ once: true }} custom={0}>
-        <div className="flex items-center gap-3 mb-4">
-          <div className="text-[10px] tracking-widest text-txt-muted">CERTIFICATIONS & AWARDS</div>
-          <div className="flex-1 border-t border-line" />
-        </div>
-
-        <div className="grid gap-4 sm:grid-cols-2">
-          <div className="t-card rounded p-5">
-            <div className="text-[10px] font-bold tracking-widest text-t-green mb-3">CERTIFICATIONS</div>
-            <div className="space-y-2.5">
-              {certifications.map((c) => (
-                <div key={c.name} className="flex gap-2 text-[12px]">
-                  <span className="text-t-green/40 mt-px shrink-0">✓</span>
-                  <div>
-                    <div className="font-medium text-txt">{c.name}</div>
-                    <div className="text-[10px] text-txt-muted">{c.org}</div>
+                      {exp.bullets.length > 0 && (
+                        <div className="space-y-2.5 pt-3 border-t border-zinc-800/60">
+                          {exp.bullets.map((b, j) => (
+                            <div key={j} className="flex gap-2.5 text-[13px] text-zinc-400 leading-relaxed">
+                              <span className="text-accent-1/40 mt-0.5 shrink-0">&#8250;</span>
+                              <span>{b}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </div>
+                </FadeIn>
               ))}
             </div>
           </div>
+        </section>
 
-          <div className="t-card rounded p-5">
-            <div className="text-[10px] font-bold tracking-widest text-t-amber mb-3">AWARDS</div>
-            <div className="space-y-2.5">
-              {awards.map((a) => (
-                <div key={a.name} className="flex gap-2 text-[12px]">
-                  <span className="text-t-amber/40 mt-px shrink-0">★</span>
-                  <div>
-                    <div className="font-medium text-txt">{a.name}</div>
-                    <div className="text-[10px] text-txt-muted">{a.org}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
+        {/* CTA */}
+        <FadeIn>
+          <div className="text-center pt-4">
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              className="inline-flex items-center gap-2 rounded-full border border-zinc-700 bg-zinc-900/60 px-5 py-2.5 text-[13px] text-zinc-300 transition hover:border-accent-1/40 hover:text-white"
+            >
+              Download full resume
+              <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" x2="12" y1="15" y2="3" />
+              </svg>
+            </a>
           </div>
-        </div>
-      </motion.section>
-    </div>
+        </FadeIn>
+      </div>
+    </PageWrapper>
   );
 }
